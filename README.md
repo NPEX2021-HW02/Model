@@ -8,12 +8,12 @@ Directory structure
 Directory structure is shown belows :
 
 ```
-├── models                                   #Model files
+├── models                                   # Model files
 │   ├── caffe                                # TF2Caffe converted models for the simulator
 │   └── tensorflow                           # Tensorflow model files
 │       ├── efficientnet-lite0_int8.tflite   # Modified tensorflow models for better accuracy
 │       └── official                         # Official model files
-├── caffe(To be updated)                     # Modified caffe to verify the results of FPGA
+├── caffe                                    # Modified caffe to verify the results of FPGA
 │                                            # (=Fixed-point simulator)
 └── scripts(To be updated)                   # Python scripts files
 ```
@@ -29,7 +29,7 @@ Significant features of EfficientNet-lite are as follows.
 * Replace all swish with RELU6: for easier post-quantization.
 * Fix the stem and head while scaling models up: for keeping models small and fast.
 
-Here is the official checkpoints of Efficient-lite0 what we used, and its accurracy, params, flops, and Pixel4's CPU/GPU/EdgeTPU latency.
+Here is the official checkpoints of Efficient-lite0 what we used, and its accurracy, params, flops, and Pixel4's CPU/GPU latency.
 
 |**Model** | **params** | **MAdds** | **FP32 accuracy (official)** | **FP32 accuracy (measured)** | **FP32 CPU  latency** | **FP32 GPU latency** | **INT8 accuracy (official)** |**INT8 accuracy (measured)** | **INT8 CPU latency**  |
 |------|-----|-------|-------|-------|-------|-------|-------|-------|-------|
@@ -42,4 +42,5 @@ To verify the operation on the FPGA, the golden vectors accurate in bit-level is
 Since the default tensorflow's quantization scheme uses quantized fp32 values, bit-level differences can be caused from the results of the FPGA.
 So we implemented a framework-level fixed-point simulator with [NVCaffe](https://github.com/NVIDIA/caffe).
 
+Most of CUDA codes are not imeplemented, so you'd better to use CPU.
 
